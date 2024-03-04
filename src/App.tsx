@@ -4,7 +4,8 @@ import TaskCard from "./components/TaskCard";
 function App() {
   return (
     <>
-      <TaskCard />
+      <h1>This is the app</h1>
+      <TaskCard title="This is done" status="Done" />
     </>
   );
 }
