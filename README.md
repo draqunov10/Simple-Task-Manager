@@ -17,14 +17,30 @@ If you are developing a production application, we recommend updating the config
 export default {
   // other rules...
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
+    ecmaVersion: "latest",
+    sourceType: "module",
+    project: ["./tsconfig.json", "./tsconfig.node.json"],
     tsconfigRootDir: __dirname,
   },
-}
+};
 ```
 
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+# Current packages for this project:
+
+├── @types/react-dom@18.2.19
+├── @types/react@18.2.61
+├── @typescript-eslint/eslint-plugin@7.1.0
+├── @typescript-eslint/parser@7.1.0
+├── @vitejs/plugin-react@4.2.1
+├── bootstrap@5.3.3
+├── eslint-plugin-react-hooks@4.6.0
+├── eslint-plugin-react-refresh@0.4.5
+├── eslint@8.57.0
+├── react-dom@18.2.0
+├── react@18.2.0
+├── typescript@5.3.3
+└── vite@5.1.4

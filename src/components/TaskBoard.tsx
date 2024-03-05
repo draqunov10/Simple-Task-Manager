@@ -1,13 +1,20 @@
-import TaskCard from "./TaskCard";
-
 interface TaskCardProps {
-  taskCards: JSX.Element[];
+  title: "Backlog" | "In Progress" | "Done";
+  taskCards?: JSX.Element[] | null;
+  handleOnDrop: Function;
 }
 
-function TaskBoard({ taskCards }: TaskCardProps) {
+function TaskBoard({ title, taskCards = null, handleOnDrop }: TaskCardProps) {
   return (
     <>
-      <h1>Task Board</h1>
+      <div
+        className="task-board rounded"
+        onDrop={(e) => handleOnDrop(e, title)}
+        onDragOver={(e) => e.preventDefault()}
+      >
+        <h1 className="task-board-title">{title} Board</h1>
+        {taskCards}
+      </div>
     </>
   );
 }
