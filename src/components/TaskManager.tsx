@@ -3,65 +3,82 @@ import TaskCard from "./TaskCard";
 import { useState, useEffect } from "react";
 
 type Status = "Backlog" | "In Progress" | "Done";
+let taskStateMap: {};
 
 function TaskManager() {
-  function handleOnDrop(
-    e: React.DragEvent<HTMLDivElement>,
-    boardTitle: Status
-  ) {
-    let taskDetails = JSON.parse(e.dataTransfer.getData("task-details"));
-    taskDetails.newStatus = boardTitle;
-
-    if (boardTitle === "Backlog") {
-      addTask(setBacklogTasks, backlogTasks, taskDetails);
-      removeTask(setInProgressTasks, inProgressTasks, taskDetails.id);
-      removeTask(setDoneTasks, doneTasks, taskDetails.id);
-    } else if (boardTitle === "In Progress") {
-      addTask(setInProgressTasks, inProgressTasks, taskDetails);
-      removeTask(setBacklogTasks, backlogTasks, taskDetails.id);
-      removeTask(setDoneTasks, doneTasks, taskDetails.id);
-    } else if (boardTitle === "Done") {
-      addTask(setDoneTasks, doneTasks, taskDetails);
-      removeTask(setBacklogTasks, backlogTasks, taskDetails.id);
-      removeTask(setInProgressTasks, inProgressTasks, taskDetails.id);
-    }
-  }
-
   const [backlogTasks, setBacklogTasks] = useState<JSX.Element[]>([]);
   const [inProgressTasks, setInProgressTasks] = useState<JSX.Element[]>([]);
   const [doneTasks, setDoneTasks] = useState<JSX.Element[]>([]);
 
+  taskStateMap = {
+    Backlog: setBacklogTasks,
+    "In Progress": setInProgressTasks,
+    Done: setDoneTasks,
+  };
+
+  setTasks();
+
+  return (
+    <>
+      <div className="task-manager">
+        <TaskBoard title="Backlog" taskCards={backlogTasks} />
+        <TaskBoard title="In Progress" taskCards={inProgressTasks} />
+        <TaskBoard title="Done" taskCards={doneTasks} />
+      </div>
+    </>
+  );
+}
+
+export function handleOnDrop(
+  e: React.DragEvent<HTMLDivElement>,
+  boardTitle: Status
+) {
+  const taskDetails = JSON.parse(e.dataTransfer.getData("task-details"));
+
+  const oldStatus = taskDetails.status;
+  taskDetails.status = boardTitle;
+  switchTaskStatus(oldStatus, taskDetails);
+}
+
+export function handleOnCreateTask(taskStatus: Status) {
+  createTask(taskStatus);
+}
+
+function setTasks() {
   useEffect(() => {
     fetch("http://localhost:8081/tasks")
       .then((response: Response) => response.json())
       .then((data: Array<any>) => {
-        setBacklogTasks(
+        taskStateMap["Backlog"](
           data
             .filter((task) => task.task_status === "Backlog")
             .map((task) => (
               <TaskCard
+                key={task.task_id}
                 id={task.task_id}
                 title={task.task_desc}
                 status="Backlog"
               />
             ))
         );
-        setInProgressTasks(
+        taskStateMap["In Progress"](
           data
             .filter((task) => task.task_status === "In Progress")
             .map((task) => (
               <TaskCard
+                key={task.task_id}
                 id={task.task_id}
                 title={task.task_desc}
                 status="In Progress"
               />
             ))
         );
-        setDoneTasks(
+        taskStateMap["Done"](
           data
             .filter((task) => task.task_status === "Done")
             .map((task) => (
               <TaskCard
+                key={task.task_id}
                 id={task.task_id}
                 title={task.task_desc}
                 status="Done"
@@ -70,55 +87,81 @@ function TaskManager() {
         );
       });
   }, []);
-
-  return (
-    <>
-      <div className="task-manager">
-        <TaskBoard
-          title="Backlog"
-          taskCards={backlogTasks}
-          handleOnDrop={handleOnDrop}
-        />
-        <TaskBoard
-          title="In Progress"
-          taskCards={inProgressTasks}
-          handleOnDrop={handleOnDrop}
-        />
-        <TaskBoard
-          title="Done"
-          taskCards={doneTasks}
-          handleOnDrop={handleOnDrop}
-        />
-      </div>
-    </>
-  );
 }
 
-function addTask(
-  setter: Function,
-  taskCardsArray: JSX.Element[],
+function createTask(taskStatus: Status) {
+  console.log("ASDAS");
+  fetch(
+    `http://localhost:8081/create/${encodeURIComponent(
+      " "
+    )}/${encodeURIComponent(taskStatus)}`
+  )
+    .then((response: Response) => response.json())
+    .then((data: {}) => {
+      console.log("3333333");
+      taskStateMap[taskStatus]((taskCardsArray) => [
+        ...taskCardsArray,
+        <TaskCard id={data["lastID"]} status={taskStatus} isNew={true} />,
+      ]);
+    });
+}
+
+function switchTaskStatus(
+  oldStatus: Status,
   taskDetails: {
     id: number;
     title: string;
-    newStatus: Status;
+    status: Status;
   }
 ) {
-  setter([
+  fetch(
+    `http://localhost:8081/update/status/${taskDetails.id}/${encodeURIComponent(
+      taskDetails.status
+    )}`
+  );
+
+  taskStateMap[oldStatus]((taskCardsArray) =>
+    taskCardsArray.filter((task) => task.props.id !== taskDetails.id)
+  );
+  taskStateMap[taskDetails.status]((taskCardsArray) => [
     ...taskCardsArray,
     <TaskCard
+      key={taskDetails.id}
       id={taskDetails.id}
       title={taskDetails.title}
-      status={taskDetails.newStatus}
+      status={taskDetails.status}
     />,
   ]);
 }
 
-function removeTask(
-  setter: Function,
-  taskCardsArray: JSX.Element[],
-  id: number
+export function changeTaskDescription(taskDetails: {
+  id: number;
+  title: string;
+  status: Status;
+}) {
+  fetch(
+    `http://localhost:8081/update/desc/${taskDetails.id}/${encodeURIComponent(
+      taskDetails.title
+    )}`
+  );
+  taskStateMap[taskDetails.status]((taskCardsArray) => [
+    ...taskCardsArray.filter((task) => task.props.id !== taskDetails.id),
+    <TaskCard
+      id={taskDetails.id}
+      title={taskDetails.title}
+      status={taskDetails.status}
+    />,
+  ]);
+}
+
+export function deleteTask(
+  taskId: number,
+  taskStatus: "Backlog" | "In Progress" | "Done"
 ) {
-  setter(taskCardsArray.filter((task) => task.props.id !== id));
+  fetch(`http://localhost:8081/delete/${taskId}`);
+  taskStateMap[taskStatus]((taskCardsArray) =>
+    taskCardsArray.filter((task) => task.props.id !== taskId)
+  );
 }
 
 export default TaskManager;

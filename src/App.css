@@ -7,9 +7,14 @@
 }
 
 .task-card {
-  margin: 1px;
+  margin: 10px;
   width: 400px;
   transition: all 0.3s ease;
+}
+
+.add-task-card {
+  margin: 10px;
+  width: 400px;
 }
 
 .task-card-details {

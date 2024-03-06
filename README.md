@@ -1,35 +1,46 @@
-# React + TypeScript + Vite
+# Manually Installed Node Packages:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+vite
+typescript
+mysql2
+bootstrap
+concurrently
+express
+cors
 
-Currently, two official plugins are available:
+If not yet installed,
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
-    tsconfigRootDir: __dirname,
-  },
-};
+```bash
+npm i vite typescript mysql2 bootstrap concurrently express cors
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+# To Start The App:
 
-# Current packages for this project:
+Simply use
+
+```sh
+npm run dev
+```
+
+## MySQL Script:
+
+Highly encouraged to use the script in `./sql-script/setup.sql` for creating the database/schema **task_schema** and setting up the table **tasks** with the correct fields as well as initial records to test out.
+
+## MySQL Database Details:
+
+MySQL Server Version Used: 8.0.36
+Port: Default (3306)
+Database/Schema Name: task_schema
+Table Name: tasks
+
+Fields:
+task_id INT PRIMARY KEY AUTO_INCREMENT
+task_desc VARCHAR(100) NOT NULL
+task_status CHAR(20) NOT NULL
+
+**Note**: Make sure local MySQL server is starting otherwise there is an error code **'ECONNREFUSED'**
+
+## Overall packages for this project:
 
 ├── @types/react-dom@18.2.19
 ├── @types/react@18.2.61
@@ -37,9 +48,12 @@ export default {
 ├── @typescript-eslint/parser@7.1.0
 ├── @vitejs/plugin-react@4.2.1
 ├── bootstrap@5.3.3
+├── concurrently@8.2.2
 ├── eslint-plugin-react-hooks@4.6.0
 ├── eslint-plugin-react-refresh@0.4.5
 ├── eslint@8.57.0
+├── express@4.18.3
+├── mysql2@3.9.2
 ├── react-dom@18.2.0
 ├── react@18.2.0
 ├── typescript@5.3.3

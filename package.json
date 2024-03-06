@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "express": "node ./src/services/express.js",
+    "database": "node ./src/services/database.js",
     "vite": "vite",
     "dev": "concurrently --kill-others \"npm run express\" \"npm run vite\"",
     "build": "tsc && vite build",
