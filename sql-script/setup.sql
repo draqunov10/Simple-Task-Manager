@@ -29,7 +29,7 @@ CREATE TABLE `tasks` (
   `task_desc` varchar(100) NOT NULL,
   `task_status` char(20) NOT NULL,
   PRIMARY KEY (`task_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `tasks` (
 
 LOCK TABLES `tasks` WRITE;
 /*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
-INSERT INTO `tasks` VALUES (1,'Reviewing Simple TaskBoard Manager','In Progress'),(2,'Functioning TaskBoard','Done'),(3,'Update Database','Done'),(4,'Add Records','Done'),(5,'Add README','Done'),(14,'Interview the Applicant','Backlog'),(15,'Assess Applicant','Backlog'),(16,'Assess the Applicant','Backlog'),(17,'Testing App','In Progress'),(18,'Connect React to MySQL','Done');
+INSERT INTO `tasks` VALUES (1,'Reviewing Simple TaskBoard Manager','In Progress'),(2,'Functioning TaskBoard','Done'),(3,'Update Database','Done'),(4,'Add Records','Done'),(5,'Add README','Done'),(6,'Interview the Applicant','Backlog'),(7,'Assess the Applicant','Backlog'),(8,'Testing App','In Progress'),(9,'Connect React to MySQL','Done'),(10,'Pass the Applicant','Backlog');
 /*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-07  3:17:58
+-- Dump completed on 2024-03-07 18:47:33
