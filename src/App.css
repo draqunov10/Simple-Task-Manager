@@ -1,15 +1,36 @@
+html,
+body,
+#app {
+  height: 100%;
+}
 .app-title {
   display: flex;
   justify-content: center;
-  margin-top: 3vh;
-  padding-bottom: 3vh;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  margin-bottom: 3vh;
   border-bottom: 1px solid #000000;
+  color: white;
+  background-color: #283739;
 }
 
-.task-card {
+#root {
+  height: 100%;
+  background-color: white;
+}
+
+.card {
+  background-color: yellow;
   margin: 10px;
   width: 400px;
   transition: all 0.3s ease;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
 }
 
 .add-task-card {
@@ -26,24 +47,32 @@
 .task-board {
   display: flex;
   flex-direction: column;
-  background-color: #222222;
-  background-color: gray;
-  color: aliceblue;
-  color: black;
+  background-color: #283739;
   padding-top: 20px;
+  padding-bottom: 20px;
   width: 500px;
-  height: 80vh;
-  padding-left: 10px;
-  padding-right: 10px;
+  min-height: 80vh;
   align-items: center;
+}
+
+.backlog {
+  color: #e00543;
+}
+
+.in-progress {
+  color: #228896;
+}
+
+.done {
+  color: #a9c52f;
 }
 
 .task-manager {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .fetch-display {
@@ -58,4 +87,13 @@
 
 .test {
   background-color: aqua;
+}
+
+.instructions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10vh;
+  padding-bottom: 4vh;
 }

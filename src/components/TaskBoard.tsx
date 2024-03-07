@@ -1,23 +1,24 @@
 import { handleOnDrop, handleOnCreateTask } from "./TaskManager";
 
 interface TaskCardProps {
+  className?: string;
   title: "Backlog" | "In Progress" | "Done";
   taskCards?: JSX.Element[] | null;
 }
 
-function TaskBoard({ title, taskCards = null }: TaskCardProps) {
+function TaskBoard({ className = "", title, taskCards = null }: TaskCardProps) {
   return (
     <>
       <div
-        className="task-board rounded"
+        className={`task-board rounded ${className}`}
         onDrop={(e) => handleOnDrop(e, title)}
         onDragOver={(e) => e.preventDefault()}
       >
         <div>
-          <h1 className="task-board-title">{title} Board</h1>
+          <h1 className="card card-title task-board-title">{title} Board</h1>
           {taskCards}
           <div
-            className="card card-body bg-white shadow-sm add-task-card"
+            className="card card-body add-task-card"
             onClick={() => handleOnCreateTask(title)}
           >
             <div className="d-flex justify-content-center">

@@ -43,7 +43,7 @@ function TaskCard({ id, title = "", status, isNew = false }: TaskCardProps) {
       draggable
       onDragStart={(e) => handleOnDragStart(e, { id, title, status })}
     >
-      <div className="card card-body bg-white shadow-sm">
+      <div className="card card-body">
         <div className="task-card-details">
           <div>
             {currentTitle}

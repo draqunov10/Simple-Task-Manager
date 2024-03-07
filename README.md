@@ -1,4 +1,6 @@
-# Manually Installed Node Packages:
+# Simple Task Manager App w/ MySQL & React
+
+## Manually Installed Node Packages:
 
 vite
 typescript
@@ -24,21 +26,27 @@ npm run dev
 
 ## MySQL Script:
 
-Highly encouraged to use the script in `./sql-script/setup.sql` for creating the database/schema **task_schema** and setting up the table **tasks** with the correct fields as well as initial records to test out.
+Highly encouraged to use the script in `./sql-script/setup.sql` for creating the database/schema **'task_schema'** and setting up the table **'tasks'** with the correct fields as well as initial records to test out.
 
 ## MySQL Database Details:
 
 MySQL Server Version Used: 8.0.36
+
 Port: Default (3306)
+
 Database/Schema Name: task_schema
+
 Table Name: tasks
 
 Fields:
+
 task_id INT PRIMARY KEY AUTO_INCREMENT
+
 task_desc VARCHAR(100) NOT NULL
+
 task_status CHAR(20) NOT NULL
 
-**Note**: Make sure local MySQL server is starting otherwise there is an error code **'ECONNREFUSED'**
+**Note**: Make sure local MySQL server is running otherwise there is an error code **'ECONNREFUSED'**
 
 ## Overall packages for this project:
 

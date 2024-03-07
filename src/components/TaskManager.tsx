@@ -21,9 +21,17 @@ function TaskManager() {
   return (
     <>
       <div className="task-manager">
-        <TaskBoard title="Backlog" taskCards={backlogTasks} />
-        <TaskBoard title="In Progress" taskCards={inProgressTasks} />
-        <TaskBoard title="Done" taskCards={doneTasks} />
+        <TaskBoard
+          className="backlog"
+          title="Backlog"
+          taskCards={backlogTasks}
+        />
+        <TaskBoard
+          className="in-progress"
+          title="In Progress"
+          taskCards={inProgressTasks}
+        />
+        <TaskBoard className="done" title="Done" taskCards={doneTasks} />
       </div>
     </>
   );
