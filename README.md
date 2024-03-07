@@ -16,18 +16,6 @@ If not yet installed,
 npm i vite typescript mysql2 bootstrap concurrently express cors
 ```
 
-# To Start The App:
-
-Simply use
-
-```sh
-npm run dev
-```
-
-## MySQL Script:
-
-Highly encouraged to use the script in `./sql-script/setup.sql` for creating the database/schema **'task_schema'** and setting up the table **'tasks'** with the correct fields as well as initial records to test out.
-
 ## MySQL Database Details:
 
 ```
@@ -41,9 +29,29 @@ Fields:
 - task_status CHAR(20) NOT NULL
 ```
 
-**Note**: Make sure local MySQL server is running otherwise there is an error code **'ECONNREFUSED'**
+## MySQL Script:
 
-## Overall packages for this project:
+Highly encouraged to use the script in `./sql-script/setup.sql` for creating the database/schema **'task_schema'** and setting up the table **'tasks'** with the correct fields as well as initial records to test out.
+
+# To Start The App:
+
+Simply use
+
+```sh
+npm run dev
+```
+
+**Note:**
+-- Make sure local MySQL server is running otherwise there is an error code **'ECONNREFUSED'**
+-- And that all packages required are installed
+
+# Sample Screenshots
+
+![Sample of the Simple TaskBoard Manager](public/Simple-Task-Manager-Sample.png)
+
+![Sample of the MySQL Database](public/MySQL-Database-Sample.png)
+
+## (Extra) Overall packages for this project:
 
 - @types/react-dom@18.2.19
 - @types/react@18.2.61
